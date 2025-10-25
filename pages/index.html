@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المكتبة الرئيسية</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="../css/styles.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f5f7fa;
+            direction: rtl;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .user-avatar:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .container {
+            display: flex;
+            min-height: calc(100vh - 80px);
+        }
+
+        .sidebar {
+            width: 250px;
+            background: white;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            padding: 2rem 0;
+        }
+
+        .sidebar h3 {
+            padding: 0 2rem 1rem;
+            color: #333;
+            border-bottom: 2px solid #f0f0f0;
+            margin-bottom: 1rem;
+        }
+
+        .category-list {
+            list-style: none;
+        }
+
+        .category-list li {
+            margin-bottom: 0.5rem;
+        }
+
+        .category-list a {
+            display: block;
+            padding: 0.8rem 2rem;
+            color: #666;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-right: 3px solid transparent;
+        }
+
+        .category-list a:hover,
+        .category-list a.active {
+            background: #f8f9ff;
+            color: #667eea;
+            border-right-color: #667eea;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+        }
+
+        .welcome-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .welcome-section h2 {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .welcome-section p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .books-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .section-header h2 {
+            color: #333;
+            font-size: 1.5rem;
+        }
+
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .book-card {
+            background: #f8f9ff;
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .book-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-color: #667eea;
+        }
+
+        .book-cover {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .book-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .book-author {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .book-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .due-date {
+            background: #fff3cd;
+            color: #856404;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+        }
+
+        .book-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5a6fd8;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .no-books {
+            text-align: center;
+            padding: 3rem;
+            color: #666;
+        }
+
+        .no-books i {
+            font-size: 4rem;
+            color: #ddd;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                order: 2;
+            }
+            
+            .main-content {
+                order: 1;
+            }
+            
+            .books-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1><i class="fas fa-book"></i> المكتبة الرقمية</h1>
+        <div class="user-info">
+            <span id="userName">المستخدم</span>
+            <div class="user-avatar" onclick="openProfile()">
+                <i class="fas fa-user"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h3><i class="fas fa-list"></i> تصنيفات الكتب</h3>
+            <ul class="category-list">
+                <li><a href="#" class="active"><i class="fas fa-book"></i> جميع الكتب</a></li>
+                <li><a href="#"><i class="fas fa-code"></i> البرمجة</a></li>
+                <li><a href="#"><i class="fas fa-palette"></i> الفنون</a></li>
+                <li><a href="#"><i class="fas fa-microscope"></i> العلوم</a></li>
+                <li><a href="#"><i class="fas fa-history"></i> التاريخ</a></li>
+                <li><a href="#"><i class="fas fa-heart"></i> الأدب</a></li>
+                <li><a href="#"><i class="fas fa-chart-line"></i> الاقتصاد</a></li>
+                <li><a href="#"><i class="fas fa-graduation-cap"></i> التعليم</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <div class="welcome-section">
+                <h2>مرحباً بك، <span id="welcomeUserName">المستخدم</span>!</h2>
+                <p>إليك قائمة الكتب التي استعرتها من المكتبة</p>
+            </div>
+
+            <div class="books-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-bookmark"></i> الكتب المستعارة</h2>
+                    <span class="book-count">(<span id="bookCount">3</span> كتاب)</span>
+                </div>
+
+                <div class="books-grid" id="booksGrid">
+                    <div class="book-card">
+                        <div class="book-cover">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3 class="book-title">تعلم البرمجة من الصفر</h3>
+                        <p class="book-author">أحمد محمد</p>
+                        <div class="book-info">
+                            <span class="due-date">مستحق: 15/12/2024</span>
+                        </div>
+                        <div class="book-actions">
+                            <button class="btn btn-primary">قراءة</button>
+                            <button class="btn btn-secondary">تجديد</button>
+                        </div>
+                    </div>
+
+                    <div class="book-card">
+                        <div class="book-cover">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <h3 class="book-title">فن التصميم الجرافيكي</h3>
+                        <p class="book-author">فاطمة علي</p>
+                        <div class="book-info">
+                            <span class="due-date">مستحق: 20/12/2024</span>
+                        </div>
+                        <div class="book-actions">
+                            <button class="btn btn-primary">قراءة</button>
+                            <button class="btn btn-secondary">تجديد</button>
+                        </div>
+                    </div>
+
+                    <div class="book-card">
+                        <div class="book-cover">
+                            <i class="fas fa-microscope"></i>
+                        </div>
+                        <h3 class="book-title">مبادئ الفيزياء الحديثة</h3>
+                        <p class="book-author">د. خالد حسن</p>
+                        <div class="book-info">
+                            <span class="due-date">مستحق: 25/12/2024</span>
+                        </div>
+                        <div class="book-actions">
+                            <button class="btn btn-primary">قراءة</button>
+                            <button class="btn btn-secondary">تجديد</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/app.js"></script>
+    <script>
+        function openProfile() {
+            window.location.href = 'profile.html';
+        }
+    </script>
+</body>
+</html>
